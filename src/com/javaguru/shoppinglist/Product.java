@@ -1,12 +1,44 @@
 package com.javaguru.shoppinglist;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Objects;
 
 public class Product {
 
     private Long id;
     private String name;
     private BigDecimal price;
+    private String description;
+    private double discount;
+    private String category;
+
+
+
+    public Product() {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.discount = discount;
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
 
     public Long getId() {
         return id;
@@ -29,7 +61,46 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+         this.price = price;
     }
 
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(product.discount, discount) == 0 &&
+                Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(price, product.price) &&
+                Objects.equals(description, product.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, description, discount);
+    }
+
+    MathContext m = new MathContext(2);
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", price with discount=" + price.subtract(price.multiply(BigDecimal.valueOf(discount)).divide(BigDecimal.valueOf(100)).round(m))+
+                ", discount=" + discount +"%"+ '\'' +
+                ", category=" + category +
+                '}';
+    }
 }
