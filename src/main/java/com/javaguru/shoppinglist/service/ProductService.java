@@ -1,5 +1,4 @@
 package com.javaguru.shoppinglist.service;
-
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.mappers.BeanMapper;

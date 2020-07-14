@@ -1,5 +1,6 @@
 package com.javaguru.shoppinglist.dto;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Objects;
 
 public class ProductDto {
@@ -70,15 +71,21 @@ public class ProductDto {
         return Objects.hash(id, name, price, description, discount, category);
     }
 
+    public BigDecimal PriceWithDiscount(){
+        MathContext m = new MathContext(2);
+        return price.subtract(price.multiply(BigDecimal.valueOf(discount)).divide(BigDecimal.valueOf(100)).round(m));
+    }
+
     @Override
     public String toString() {
-        return "ProductDto{" +
+        return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price=" + price +
+                ", price=€" + price +
                 ", description='" + description + '\'' +
-                ", discount=" + discount +
-                ", category='" + category + '\'' +
+                ", price with discount=" + PriceWithDiscount()+
+                ", discount=" + discount +"%"+ '\'' +
+                ", category=" + category +
                 '}';
     }
 }

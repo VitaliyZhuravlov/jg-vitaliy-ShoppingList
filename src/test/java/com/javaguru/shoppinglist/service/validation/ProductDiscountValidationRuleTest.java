@@ -24,4 +24,13 @@ public class ProductDiscountValidationRuleTest {
                 .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ValidationExceptionMessages.DISCOUNT_VALIDATION_MSG);
     }
+
+    @Test
+    public void shouldThrowExceptionWhenDiscountIsNegative() {
+        ProductDto input = new ProductDto();
+        input.setDiscount(-1);
+        assertThatThrownBy(() -> victim.validate(input))
+                .isInstanceOf(NumberFormatException.class)
+                .hasMessage(ValidationExceptionMessages.NEGATIVE_DISCOUNT_VALIDATION_MSG);
+    }
 }

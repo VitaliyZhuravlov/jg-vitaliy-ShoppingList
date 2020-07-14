@@ -1,7 +1,9 @@
 package com.javaguru.shoppinglist.service.validation;
 import com.javaguru.shoppinglist.dto.ProductDto;
+import org.springframework.stereotype.Service;
 import java.util.Set;
 
+@Service
 public class ProductValidationService {
 
     private final Set<ProductValidationRule> validationRules;

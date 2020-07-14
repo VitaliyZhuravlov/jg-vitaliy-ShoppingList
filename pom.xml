@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jg</groupId>
-    <artifactId>shopping-list</artifactId>
+    <groupId>com.javaguru</groupId>
+    <artifactId>shoppinglist</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.22.RELEASE</version>
+            <version>5.2.7.RELEASE</version>
         </dependency>
 
     </dependencies>

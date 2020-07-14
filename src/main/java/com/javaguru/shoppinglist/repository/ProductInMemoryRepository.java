@@ -1,7 +1,6 @@
 package com.javaguru.shoppinglist.repository;
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import org.springframework.stereotype.Repository;
-
 import java.util.*;
 @Repository
 public class ProductInMemoryRepository implements ShoppingListRepository {

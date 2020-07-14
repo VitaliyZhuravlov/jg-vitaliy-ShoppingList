@@ -1,5 +1,4 @@
 package com.javaguru.shoppinglist.domain;
-
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -59,7 +58,7 @@ public class ProductEntity {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price=" + price +
+                ", price= €" + price +
                 ", description='" + description + '\'' +
                 ", price with discount=" + PriceWithDiscount()+
                 ", discount=" + discount +"%"+ '\'' +
