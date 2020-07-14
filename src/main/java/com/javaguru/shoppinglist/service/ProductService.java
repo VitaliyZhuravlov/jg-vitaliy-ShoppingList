@@ -7,6 +7,8 @@ import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductService {
 
@@ -32,6 +34,14 @@ public class ProductService {
         if(productEntity == null) { throw new ProductNotFoundException("Product not found " + id); }
         return productEntity;
     }
+
+    public Optional<ProductEntity> FindProductByName(String name)  {
+        Optional<ProductEntity> productEntity =  shoppingListRepository.FindProductByName(name);
+        if(productEntity == null) { throw new ProductNotFoundException("Product not found " + name); }
+        return productEntity;
+    }
+
+
 
     public void deleteProduct(Long id){
         shoppingListRepository.deleteProduct(id);

@@ -2,7 +2,6 @@ package com.javaguru.shoppinglist.console;
 import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
 @Component
 @Order(3)

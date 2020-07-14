@@ -10,15 +10,18 @@ public class ConsoleUIConfiguration {
     private final MenuAction findProductByIdAction;
     private final MenuAction deleteProductByIdAction;
     private final MenuAction exitAction;
+    private final MenuAction findProductByNameAction;
 
     @Autowired
     ConsoleUIConfiguration(MenuAction createProductAction,
                            MenuAction findProductByIdAction,
                            MenuAction deleteProductByIdAction,
+                           MenuAction findProductByNameAction,
                            MenuAction exitAction) {
         this.createProductAction = createProductAction;
         this.findProductByIdAction = findProductByIdAction;
         this.deleteProductByIdAction = deleteProductByIdAction;
+        this.findProductByNameAction = findProductByNameAction;
         this.exitAction = exitAction;
 
     }
@@ -30,6 +33,7 @@ public class ConsoleUIConfiguration {
         menuActions.add(findProductByIdAction);
         menuActions.add(deleteProductByIdAction);
         menuActions.add(exitAction);
+        menuActions.add(findProductByNameAction);
         return new ConsoleUI(menuActions);
     }
 }

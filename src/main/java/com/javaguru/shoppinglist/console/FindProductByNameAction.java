@@ -4,27 +4,30 @@ import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 import java.util.Scanner;
 @Component
-@Order(1)
-public class FindProductByIdAction implements MenuAction {
+@Order(2)
+public class FindProductByNameAction implements MenuAction {
 
     private final ProductService service;
 
-    public FindProductByIdAction(ProductService service) {
+    public FindProductByNameAction(ProductService service) {
         this.service = service;
     }
+
     @Override
     public void execute(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter product id: ");
-        Long id = Long.valueOf(scanner.nextLine());
-        ProductEntity productEntity = service.findProductById(id);
+        System.out.println("Enter product name: ");
+        String name = String.valueOf(scanner.nextLine());
+        Optional<ProductEntity> productEntity = service.FindProductByName(name);
         System.out.println("Product founded" + productEntity);
     }
 
     @Override
     public String toString() {
-        return "Find product by id";
+        return "Find product by name";
     }
 }
