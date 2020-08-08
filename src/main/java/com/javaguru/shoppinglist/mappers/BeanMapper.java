@@ -11,13 +11,20 @@ public class BeanMapper {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setPrice(entity.getPrice());
-        dto.setDescription(entity.getDescription());
         dto.setDiscount(entity.getDiscount());
+        dto.setDescription(entity.getDescription());
         dto.setCategory(entity.getCategory());
         return dto;
     }
 
     public ProductEntity toEntity(ProductDto dto) {
-        return new ProductEntity(dto.getId(), dto.getName(), dto.getPrice(),dto.getDescription(),dto.getDiscount(),dto.getCategory());
+        return new ProductEntity(
+                dto.getId(),
+                dto.getName(),
+                dto.getPrice(),
+                dto.getDiscount(),
+                dto.getDescription(),
+                dto.getCategory()
+        );
     }
 }

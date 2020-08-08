@@ -1,14 +1,19 @@
 package com.javaguru.shoppinglist.dto;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
+@EqualsAndHashCode
+@ToString
 public class ProductDto {
     private Long id;
     private String name;
     private BigDecimal price;
+    private BigDecimal discount;
     private String description;
-    private double discount;
     private String category;
 
     public Long getId() {
@@ -32,18 +37,20 @@ public class ProductDto {
         this.price = price;
     }
 
-    public String getDescription() {
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
+    public String getDescription()
+    {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-    public void setDiscount(double discount) {
-        this.discount = discount;
     }
 
     public String getCategory() {
@@ -53,39 +60,4 @@ public class ProductDto {
         this.category = category;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductDto that = (ProductDto) o;
-        return Double.compare(that.discount, discount) == 0 &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(price, that.price) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(category, that.category);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, price, description, discount, category);
-    }
-
-    public BigDecimal PriceWithDiscount(){
-        MathContext m = new MathContext(2);
-        return price.subtract(price.multiply(BigDecimal.valueOf(discount)).divide(BigDecimal.valueOf(100)).round(m));
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=€" + price +
-                ", description='" + description + '\'' +
-                ", price with discount=" + PriceWithDiscount()+
-                ", discount=" + discount +"%"+ '\'' +
-                ", category=" + category +
-                '}';
-    }
 }

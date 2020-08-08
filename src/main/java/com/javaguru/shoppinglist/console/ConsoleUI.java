@@ -1,11 +1,7 @@
 package com.javaguru.shoppinglist.console;
 
-import com.javaguru.shoppinglist.domain.ProductEntity;
-import com.javaguru.shoppinglist.dto.ProductDto;
-import com.javaguru.shoppinglist.service.ProductService;
 import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
 import com.javaguru.shoppinglist.service.validation.ProductValidationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -13,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 @Component
 public class ConsoleUI {
+
     private final List<MenuAction> actions;
 
     public ConsoleUI(List<MenuAction> actions) {
@@ -20,8 +17,8 @@ public class ConsoleUI {
     }
 
     public void start(){
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             try {
                 for (int i = 0; i < actions.size(); i++) {
                     System.out.println(i + ". " + actions.get(i));
@@ -31,9 +28,8 @@ public class ConsoleUI {
                     throw new IllegalArgumentException("Incorrect input");
                 }
                 actions.get(userInput).execute();
-
             } catch (ProductValidationException e) {
-                System.out.println("Product validation failed. " + e.getMessage());
+                System.out.println("Product validation failed : " + e.getMessage());
             } catch (ProductNotFoundException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {

@@ -11,10 +11,11 @@ public class ProductUniqueNameValidationRule implements ProductValidationRule {
     public ProductUniqueNameValidationRule(ShoppingListRepository repository) {
         this.repository = repository;
     }
+
     @Override
-    public void validate(ProductDto productdto) {
-        checkNotNull(productdto);
-        if (repository.FindProductByName(productdto.getName()).isPresent()) {
+    public void validate(ProductDto productDto) {
+        checkNotNull(productDto);
+        if (repository.findProductByName(productDto.getName()).isPresent()) {
             throw new IllegalArgumentException(ValidationExceptionMessages.UNIQUE_NAME_VALIDATION_MSG);
         }
     }

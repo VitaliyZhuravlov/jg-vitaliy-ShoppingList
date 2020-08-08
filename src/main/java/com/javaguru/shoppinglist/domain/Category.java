@@ -4,5 +4,6 @@ public enum Category {
     FRUIT,
     VEGETABLE,
     MEAT,
-    MILK
+    MILK,
+    BERRY
 }

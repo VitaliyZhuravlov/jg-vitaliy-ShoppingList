@@ -11,10 +11,15 @@ public class ProductNameValidationRule implements ProductValidationRule {
     public ProductNameValidationRule(ShoppingListRepository repository) {
         this.repository = repository;
     }
+
     @Override
-    public void validate(ProductDto productdto) {
-        checkNotNull(productdto);
-        if (productdto.getName().length() < 3) { throw new IllegalArgumentException(ValidationExceptionMessages.SHORT_NAME_VALIDATION_MSG); }
-        else if (productdto.getName().length() >= 32) { throw new IllegalArgumentException(ValidationExceptionMessages.LONG_NAME_VALIDATION_MSG); }
+    public void validate(ProductDto productDto) {
+        checkNotNull(productDto);
+        if (productDto.getName().length() < 3) {
+            throw new IllegalArgumentException(ValidationExceptionMessages.SHORT_NAME_VALIDATION_MSG);
+        }
+        if (productDto.getName().length() >= 32) {
+            throw new IllegalArgumentException(ValidationExceptionMessages.LONG_NAME_VALIDATION_MSG);
+        }
         }
     }

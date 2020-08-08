@@ -2,7 +2,7 @@ package com.javaguru.shoppinglist.service;
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.mappers.BeanMapper;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+import com.javaguru.shoppinglist.repository.HibernateProductRepository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
         public class ProductServiceTest {
 
         @Mock
-        private ProductInMemoryRepository repository;
+        private HibernateProductRepository repository;
         @Mock
         private ProductValidationService validationService;
         @Mock
@@ -40,15 +40,15 @@ import static org.mockito.Mockito.when;
             ProductDto dto = new ProductDto();
             dto.setId(id);
             dto.setName("Banani");
-            dto.setDescription("Banani kg");
             dto.setPrice(new BigDecimal(1.69));
-            dto.setDiscount(10);
+            dto.setDiscount(new BigDecimal(10));
+            dto.setDescription("Banani kg");
             dto.setCategory("FRUIT");
             return dto;
         }
 
         private ProductEntity entity() {
-            ProductEntity productEntity = new ProductEntity(20L,"Banani", new BigDecimal(1.69) ,"Banani kg",10,"FRUIT");
+            ProductEntity productEntity = new ProductEntity(1L,"Banani",new BigDecimal(1.69),new BigDecimal(10),"Banani kg","FRUIT");
             return productEntity;
         }
     }

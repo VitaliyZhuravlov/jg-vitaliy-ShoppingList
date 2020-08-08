@@ -8,22 +8,30 @@ public class ConsoleUIConfiguration {
 
     private final MenuAction createProductAction;
     private final MenuAction findProductByIdAction;
-    private final MenuAction deleteProductByIdAction;
-    private final MenuAction exitAction;
     private final MenuAction findProductByNameAction;
+    private final MenuAction deleteProductAction;
+    private final MenuAction exitAction;
+    private final MenuAction updateProductAction;
+    private final MenuAction createUserAction;
+    private final MenuAction findUserByIdAction;
 
     @Autowired
     ConsoleUIConfiguration(MenuAction createProductAction,
                            MenuAction findProductByIdAction,
-                           MenuAction deleteProductByIdAction,
                            MenuAction findProductByNameAction,
-                           MenuAction exitAction) {
+                           MenuAction deleteProductAction,
+                           MenuAction exitAction,
+                           MenuAction updateProductAction,
+                           MenuAction createUserAction,
+                           MenuAction findUserByIdAction) {
         this.createProductAction = createProductAction;
         this.findProductByIdAction = findProductByIdAction;
-        this.deleteProductByIdAction = deleteProductByIdAction;
+        this.deleteProductAction = deleteProductAction;
         this.findProductByNameAction = findProductByNameAction;
         this.exitAction = exitAction;
-
+        this.updateProductAction = updateProductAction;
+        this.createUserAction = createUserAction;
+        this.findUserByIdAction = findUserByIdAction;
     }
 
     @Bean
@@ -31,9 +39,12 @@ public class ConsoleUIConfiguration {
         List<MenuAction> menuActions = new ArrayList<>();
         menuActions.add(createProductAction);
         menuActions.add(findProductByIdAction);
-        menuActions.add(deleteProductByIdAction);
-        menuActions.add(exitAction);
         menuActions.add(findProductByNameAction);
+        menuActions.add(deleteProductAction);
+        menuActions.add(exitAction);
+        menuActions.add(updateProductAction);
+        menuActions.add(createUserAction);
+        menuActions.add(findUserByIdAction);
         return new ConsoleUI(menuActions);
     }
 }

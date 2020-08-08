@@ -7,6 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
@@ -19,7 +21,7 @@ public class ProductDiscountValidationRuleTest {
     @Test
     public void shouldThrowExceptionWhenExceedsDiscountLimit() {
         ProductDto input = new ProductDto();
-        input.setDiscount(101);
+        input.setDiscount( new BigDecimal(101));
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ValidationExceptionMessages.DISCOUNT_VALIDATION_MSG);
@@ -28,7 +30,7 @@ public class ProductDiscountValidationRuleTest {
     @Test
     public void shouldThrowExceptionWhenDiscountIsNegative() {
         ProductDto input = new ProductDto();
-        input.setDiscount(-1);
+        input.setDiscount(new BigDecimal(-1));
         assertThatThrownBy(() -> victim.validate(input))
                 .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ValidationExceptionMessages.NEGATIVE_DISCOUNT_VALIDATION_MSG);

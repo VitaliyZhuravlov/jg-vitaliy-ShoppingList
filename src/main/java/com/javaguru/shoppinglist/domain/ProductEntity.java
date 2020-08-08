@@ -1,68 +1,163 @@
 package com.javaguru.shoppinglist.domain;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Objects;
+import java.util.Optional;
 
+@Entity
+@Table(name = "products")
+@EqualsAndHashCode(of ={"id"})
+@ToString(of= {"id","name","price","discount","description","category"})
 public class ProductEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "name", unique = true)
     private String name;
+    @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "discount")
+    private BigDecimal discount;
+    @Column(name = "description")
     private String description;
-    private double discount;
-    private String category;
+    @Column(name ="category")
+    private  String category;
 
-    public ProductEntity(Long id, String name,BigDecimal price,String description,double discount,String category) {
+    @ManyToOne
+    private UserEntity user;
+
+    public ProductEntity() {
+    }
+
+    public ProductEntity(Long id, String name, BigDecimal price, BigDecimal discount, String description, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.description = description;
         this.discount = discount;
+        this.description = description;
         this.category = category;
     }
 
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public double getDiscount() { return discount; }
+    private ProductEntity(Builder builder) {
+        setId(builder.id);
+        setName(builder.name);
+        setPrice(builder.price);
+        setDiscount(builder.discount);
+        setDescription(builder.description);
+        setCategory(builder.category);
+        setUser(builder.user);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
     public String getDescription() {
         return description;
     }
-    public BigDecimal getPrice() { return price; }
-    public String getCategory() { return category; }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductEntity productEntity = (ProductEntity) o;
-        return Double.compare(productEntity.discount, discount) == 0 &&
-                Objects.equals(id, productEntity.id) &&
-                Objects.equals(name, productEntity.name) &&
-                Objects.equals(price, productEntity.price) &&
-                Objects.equals(description, productEntity.description) &&
-                Objects.equals(category, productEntity.category);
+    public String getCategory() {
+        return category;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, price, description, discount, category);
+    public UserEntity getUser() {
+        return user;
     }
 
-    public BigDecimal PriceWithDiscount(){
-        MathContext m = new MathContext(2);
-        return price.subtract(price.multiply(BigDecimal.valueOf(discount)).divide(BigDecimal.valueOf(100)).round(m));
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price= €" + price +
-                ", description='" + description + '\'' +
-                ", price with discount=" + PriceWithDiscount()+
-                ", discount=" + discount +"%"+ '\'' +
-                ", category=" + category +
-                '}';
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public static final class Builder {
+        private Long id;
+        private String name;
+        private BigDecimal price;
+        private BigDecimal discount;
+        private String description;
+        private String category;
+        private UserEntity user;
+
+        public Builder() {
+        }
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withPrice(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder withDiscount(BigDecimal discount) {
+            this.discount = discount;
+            return this;
+        }
+
+        public Builder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder withCategory(String category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder withUser(UserEntity user) {
+            this.user = user;
+            return this;
+        }
+
+        public ProductEntity build() {
+            return new ProductEntity(this);
+        }
     }
 }
