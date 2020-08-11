@@ -1,14 +1,13 @@
 package com.javaguru.shoppinglist.repository;
 import com.javaguru.shoppinglist.domain.ProductEntity;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface ShoppingListRepository {
+public interface ProductRepository {
 
     ProductEntity save (ProductEntity productEntity);
 
-    ProductEntity findProductById(Long id);
+    Optional<ProductEntity> findProductById(Long id);
 
     void deleteProduct(Long id);
 
@@ -17,5 +16,4 @@ public interface ShoppingListRepository {
     void update (ProductEntity productEntity);
 
     List<ProductEntity> findAll();
-
 }

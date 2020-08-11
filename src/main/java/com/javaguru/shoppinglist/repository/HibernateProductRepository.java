@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -15,7 +14,7 @@ import java.util.Optional;
 @Repository
 @Profile("hibernate")
 @Transactional
-public class HibernateProductRepository implements ShoppingListRepository{
+public class HibernateProductRepository implements ProductRepository {
 
     private final SessionFactory sessionFactory;
 
@@ -30,8 +29,9 @@ public class HibernateProductRepository implements ShoppingListRepository{
     }
 
     @Override
-    public ProductEntity findProductById(Long id) {
-        return sessionFactory.getCurrentSession().find(ProductEntity.class,id);
+    public Optional<ProductEntity> findProductById(Long id) {
+        ProductEntity productEntity = sessionFactory.getCurrentSession().find(ProductEntity.class,id);
+        return Optional.ofNullable(productEntity);
     }
 
     @Override

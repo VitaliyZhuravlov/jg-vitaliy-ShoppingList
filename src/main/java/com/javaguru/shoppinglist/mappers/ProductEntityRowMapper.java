@@ -1,10 +1,8 @@
 package com.javaguru.shoppinglist.mappers;
 import com.javaguru.shoppinglist.domain.ProductEntity;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class ProductEntityRowMapper implements RowMapper<ProductEntity> {
 

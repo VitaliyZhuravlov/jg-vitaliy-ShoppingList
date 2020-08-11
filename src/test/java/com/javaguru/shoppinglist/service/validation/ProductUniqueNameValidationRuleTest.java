@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class ProductUniqueNameValidationRuleTest {
 
     @Mock
-    private HibernateProductRepository inMemoryRepository;
+    private HibernateProductRepository hibernateProductRepository;
 
     @Spy
     @InjectMocks
@@ -28,7 +28,7 @@ public class ProductUniqueNameValidationRuleTest {
     @Test
     public void shouldThrowExceptionProductNameMustBeUnique() {
         ProductEntity entity = new ProductEntity(1L,"Banana",new BigDecimal(1.69),new BigDecimal(10),"Tasty bananas","FRUIT");
-        when(inMemoryRepository.findProductByName("Banana")).thenReturn(Optional.of(entity));
+        when(hibernateProductRepository.findProductByName("Banana")).thenReturn(Optional.of(entity));
         ProductDto input = new ProductDto();
         input.setName("Banana");
         assertThatThrownBy(() -> victim.validate(input))

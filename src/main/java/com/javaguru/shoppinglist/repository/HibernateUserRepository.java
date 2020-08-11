@@ -3,6 +3,8 @@ import com.javaguru.shoppinglist.domain.UserEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,13 +24,18 @@ public class HibernateUserRepository implements UserRepository {
     }
 
     @Override
-    public UserEntity findUserById(Long id) {
+    public Optional<UserEntity> findById(Long id) {
         UserEntity userEntity = sessionFactory.getCurrentSession().find(UserEntity.class, id);
-        return userEntity;
+        return Optional.ofNullable(userEntity);
     }
 
     @Override
     public void update(UserEntity userEntity) {
         sessionFactory.getCurrentSession().update(userEntity);
+    }
+
+    @Override
+    public List<UserEntity> findAll() {
+        return sessionFactory.getCurrentSession().createCriteria(UserEntity.class).list();
     }
 }

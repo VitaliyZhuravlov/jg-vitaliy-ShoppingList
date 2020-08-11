@@ -1,9 +1,7 @@
 package com.javaguru.shoppinglist.service;
-
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.domain.UserEntity;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 
 @Service
 public class UserProductService {

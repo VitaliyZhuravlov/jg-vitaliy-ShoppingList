@@ -1,6 +1,5 @@
 package com.javaguru.shoppinglist.console.productMenuActions;
 import com.javaguru.shoppinglist.console.MenuAction;
-import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.core.annotation.Order;

@@ -23,7 +23,7 @@ public class FindProductByNameAction implements MenuAction {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product name: ");
         String name = String.valueOf(scanner.nextLine());
-        Optional<ProductEntity> productEntity = service.findProductByName(name);
+        ProductEntity productEntity = service.findProductByName(name);
         System.out.println(productEntity);
     }
 

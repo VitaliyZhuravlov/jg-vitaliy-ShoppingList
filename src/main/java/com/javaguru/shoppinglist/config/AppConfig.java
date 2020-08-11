@@ -1,4 +1,5 @@
 package com.javaguru.shoppinglist.config;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,9 +14,9 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
+import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = "com.javaguru.shoppinglist")
