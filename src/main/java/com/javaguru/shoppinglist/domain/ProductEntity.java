@@ -27,7 +27,6 @@ public class ProductEntity {
     @Column(name ="category")
     private  String category;
 
-
     public ProductEntity() {
     }
 
@@ -173,7 +172,6 @@ public class ProductEntity {
             this.category = category;
             return this;
         }
-
 
         public ProductEntity build() {
             return new ProductEntity(this);

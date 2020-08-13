@@ -1,4 +1,5 @@
 package com.javaguru.shoppinglist.dto;
+
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;

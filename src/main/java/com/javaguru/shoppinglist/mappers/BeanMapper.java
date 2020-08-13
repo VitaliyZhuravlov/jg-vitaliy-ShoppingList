@@ -2,7 +2,6 @@ package com.javaguru.shoppinglist.mappers;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
-
 import org.springframework.stereotype.Component;
 
 @Component

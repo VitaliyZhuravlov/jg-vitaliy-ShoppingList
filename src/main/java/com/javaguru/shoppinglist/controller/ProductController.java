@@ -1,4 +1,5 @@
 package com.javaguru.shoppinglist.controller;
+
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
@@ -32,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/product/{name}")
     public ProductEntity findProductByName(@PathVariable String name) {
-        return service.getProductByName(name);
+        return service.findProductByName(name);
     }
 
     @PutMapping("/update")

@@ -47,7 +47,7 @@ public class ProductService {
         return "Successfully deleted" + id;
     }
 
-    public ProductEntity getProductByName(String name) {
+    public ProductEntity findProductByName(String name) {
         return repository.findByName(name)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found, name: " + name));
     }
