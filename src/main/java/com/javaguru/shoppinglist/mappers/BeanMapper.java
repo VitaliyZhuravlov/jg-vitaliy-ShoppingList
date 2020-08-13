@@ -2,6 +2,7 @@ package com.javaguru.shoppinglist.mappers;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,7 +26,6 @@ public class BeanMapper {
                 dto.getPrice(),
                 dto.getDiscount(),
                 dto.getDescription(),
-                dto.getCategory()
-        );
+                dto.getCategory());
     }
 }

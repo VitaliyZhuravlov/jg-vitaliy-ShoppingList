@@ -1,55 +1,58 @@
 package com.javaguru.shoppinglist.service;
+
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.mappers.BeanMapper;
 import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
-import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
-    private final ProductValidationService validationService;
+    private final ProductRepository repository;
     private final BeanMapper beanMapper;
 
-    public ProductService(ProductRepository productRepository,
-                          ProductValidationService validationService,
+    public ProductService(ProductRepository repository,
                           BeanMapper beanMapper) {
-        this.productRepository = productRepository;
-        this.validationService = validationService;
+        this.repository = repository;
         this.beanMapper = beanMapper;
     }
 
     public ProductDto save(ProductDto productDto) {
-        validationService.validate(productDto);
         ProductEntity entity = beanMapper.toEntity(productDto);
-        ProductEntity savedEntity = productRepository.save(entity);
+        ProductEntity savedEntity = repository.save(entity);
         return beanMapper.toDto(savedEntity);
     }
 
-     public ProductEntity findProductById(Long id)  {
-        return productRepository.findProductById(id)
+    public ProductEntity findProductById(Long id)  {
+        return repository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found, id: " + id));
     }
 
-    public ProductEntity findProductByName(String name)  {
-        return productRepository.findProductByName(name)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found, id: " + name));
+    public ProductEntity update(ProductEntity product) {
+        ProductEntity existingProduct = repository.findById(product.getId())
+                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
+        existingProduct.setName(product.getName());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setDiscount(product.getDiscount());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setCategory(product.getCategory());
+        return repository.save(existingProduct);
     }
 
-    public void deleteProduct(Long id){
-        productRepository.deleteProduct(id);
+    public String delete(Long id){
+        repository.deleteById(id);
+        return "Successfully deleted" + id;
     }
 
-    public void update(ProductEntity productEntity) {
-        productRepository.update(productEntity);
+    public ProductEntity getProductByName(String name) {
+        return repository.findByName(name)
+                .orElseThrow(() -> new ProductNotFoundException("Product not found, name: " + name));
     }
 
     public List<ProductEntity> findAll() {
-        return productRepository.findAll();
+        return repository.findAll();
     }
 }

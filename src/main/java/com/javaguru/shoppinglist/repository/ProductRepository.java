@@ -1,19 +1,12 @@
 package com.javaguru.shoppinglist.repository;
 import com.javaguru.shoppinglist.domain.ProductEntity;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
-public interface ProductRepository {
+@Repository
+public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
 
-    ProductEntity save (ProductEntity productEntity);
+    Optional<ProductEntity> findByName(String name);
 
-    Optional<ProductEntity> findProductById(Long id);
-
-    void deleteProduct(Long id);
-
-    Optional<ProductEntity> findProductByName(String name);
-
-    void update (ProductEntity productEntity);
-
-    List<ProductEntity> findAll();
 }

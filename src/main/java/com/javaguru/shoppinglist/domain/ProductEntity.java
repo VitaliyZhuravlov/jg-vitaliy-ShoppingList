@@ -1,7 +1,12 @@
 package com.javaguru.shoppinglist.domain;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "products")
@@ -22,8 +27,6 @@ public class ProductEntity {
     @Column(name ="category")
     private  String category;
 
-    @ManyToOne
-    private UserEntity user;
 
     public ProductEntity() {
     }
@@ -42,6 +45,36 @@ public class ProductEntity {
         this.category = category;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductEntity that = (ProductEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(discount, that.discount) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(category, that.category);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, discount, description, category);
+    }
+
     private ProductEntity(Builder builder) {
         setId(builder.id);
         setName(builder.name);
@@ -49,7 +82,6 @@ public class ProductEntity {
         setDiscount(builder.discount);
         setDescription(builder.description);
         setCategory(builder.category);
-        setUser(builder.user);
     }
 
     public Long getId() {
@@ -100,43 +132,6 @@ public class ProductEntity {
         this.category = category;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductEntity that = (ProductEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(price, that.price) &&
-                Objects.equals(discount, that.discount) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(category, that.category);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, price, discount, description, category);
-    }
-
-    @Override
-    public String toString() {
-        return "ProductEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                '}';
-    }
 
     public static final class Builder {
         private Long id;
@@ -145,7 +140,6 @@ public class ProductEntity {
         private BigDecimal discount;
         private String description;
         private String category;
-        private UserEntity user;
 
         public Builder() {
         }
@@ -180,10 +174,6 @@ public class ProductEntity {
             return this;
         }
 
-        public Builder withUser(UserEntity user) {
-            this.user = user;
-            return this;
-        }
 
         public ProductEntity build() {
             return new ProductEntity(this);

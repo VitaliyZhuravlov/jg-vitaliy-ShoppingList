@@ -1,16 +1,12 @@
 package com.javaguru.shoppinglist.repository;
-import com.javaguru.shoppinglist.domain.UserEntity;
 
-import java.util.List;
+import com.javaguru.shoppinglist.domain.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
-public interface UserRepository {
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity,Long> {
 
-    UserEntity save(UserEntity userEntity);
-
-    Optional<UserEntity> findById(Long id);
-
-    void update(UserEntity userEntity);
-
-    List<UserEntity> findAll();
+    Optional<UserEntity> findByName(String username);
 }

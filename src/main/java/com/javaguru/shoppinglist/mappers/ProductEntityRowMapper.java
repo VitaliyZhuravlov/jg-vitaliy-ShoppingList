@@ -1,9 +1,12 @@
 package com.javaguru.shoppinglist.mappers;
+
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class ProductEntityRowMapper implements RowMapper<ProductEntity> {
 
     @Override
@@ -14,7 +17,7 @@ public class ProductEntityRowMapper implements RowMapper<ProductEntity> {
                 .withPrice(rs.getBigDecimal("price"))
                 .withDiscount(rs.getBigDecimal("discount"))
                 .withDescription(rs.getString("description"))
-                .withCategory(rs.getString("Category"))
+                .withCategory(rs.getString("category"))
                 .build();
     }
 }
