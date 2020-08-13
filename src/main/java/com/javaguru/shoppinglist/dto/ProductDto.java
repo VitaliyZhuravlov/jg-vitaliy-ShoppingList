@@ -1,14 +1,26 @@
 package com.javaguru.shoppinglist.dto;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ProductDto {
 
     private Long id;
+    @NotNull
+    @Size(min = 3,max = 32 , message = "Product name must be between 3 and 32 letters")
     private String name;
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer=3, fraction=2)
     private BigDecimal price;
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer=3, fraction=2)
     private BigDecimal discount;
+    @Size(max = 255)
     private String description;
+
     private String category;
 
     public Long getId() {

@@ -3,7 +3,7 @@ import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +16,7 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public ProductDto addProduct(@RequestBody ProductDto product) {
+    public ProductDto addProduct(@Valid @RequestBody ProductDto product) {
         return service.save(product);
     }
 
