@@ -38,9 +38,9 @@ public class UserEntityTest {
     }
 
     @Test
-    public void shouldDetectNotEmpty() {
-        UserEntity userEntity = new UserEntity(2L, "Vasya");
+    public void shouldDetectEmpty() {
+        UserEntity userEntity = new UserEntity();
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
-        assertTrue(violations.isEmpty());
+        assertFalse(violations.isEmpty());
     }
 }
