@@ -9,7 +9,7 @@ public class ProductDto {
 
     private Long id;
     @NotNull
-    @Length(min = 3,max = 32 , message = "Product name must be between 3 and 32 letters")
+    @Length(min = 3,max = 32 , message = "Product name must be between 3 and 32 characters")
     private String name;
 
     @NotNull
