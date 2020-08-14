@@ -1,6 +1,9 @@
 package com.javaguru.shoppinglist.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -8,10 +11,23 @@ import java.util.Objects;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(max = 65)
     private String username;
+
+    @OneToMany(targetEntity = ProductEntity.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "up_fk", referencedColumnName = "id")
+    private List<ProductEntity> products;
+
+    public List<ProductEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductEntity> products) {
+        this.products = products;
+    }
 
     public UserEntity() {
     }

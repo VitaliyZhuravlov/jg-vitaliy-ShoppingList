@@ -44,7 +44,7 @@ public class ProductService {
 
     public String delete(Long id){
         repository.deleteById(id);
-        return "Successfully deleted" + id;
+        return "Successfully deleted " + id;
     }
 
     public ProductEntity findProductByName(String name) {
