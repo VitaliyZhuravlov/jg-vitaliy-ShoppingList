@@ -1,5 +1,6 @@
 package com.javaguru.shoppinglist.dto;
 
+import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -8,19 +9,22 @@ public class ProductDto {
 
     private Long id;
     @NotNull
-    @Size(min = 3,max = 32 , message = "Product name must be between 3 and 32 letters")
+    @Length(min = 3,max = 32 , message = "Product name must be between 3 and 32 letters")
     private String name;
 
+    @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
     @Digits(integer=3, fraction=2)
+    @Positive
     private BigDecimal price;
 
+    @PositiveOrZero
     @DecimalMin(value = "0.0", inclusive = false)
     @Digits(integer=3, fraction=2)
     @DecimalMax(value = "100")
     private BigDecimal discount;
 
-    @Size(max = 255)
+    @Length(max = 255)
     private String description;
 
     @NotEmpty

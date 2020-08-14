@@ -1,8 +1,9 @@
 package com.javaguru.shoppinglist.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(max = 65)
+    @Length(min = 3, max = 40)
     private String username;
 
     @OneToMany(targetEntity = ProductEntity.class,cascade = CascadeType.ALL)

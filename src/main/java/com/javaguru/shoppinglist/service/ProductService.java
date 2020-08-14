@@ -31,20 +31,14 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Product not found, id: " + id));
     }
 
-    public ProductEntity update(ProductEntity product) {
-        ProductEntity existingProduct = repository.findById(product.getId())
-                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
-        existingProduct.setName(product.getName());
-        existingProduct.setPrice(product.getPrice());
-        existingProduct.setDiscount(product.getDiscount());
-        existingProduct.setDescription(product.getDescription());
-        existingProduct.setCategory(product.getCategory());
-        return repository.save(existingProduct);
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 
-    public String delete(Long id){
-        repository.deleteById(id);
-        return "Successfully deleted " + id;
+    public void update(ProductDto productDto) {
+        ProductEntity entity = beanMapper.toEntity(productDto);
+        ProductEntity savedEntity = repository.save(entity);
+        beanMapper.toDto(savedEntity);
     }
 
     public ProductEntity findProductByName(String name) {

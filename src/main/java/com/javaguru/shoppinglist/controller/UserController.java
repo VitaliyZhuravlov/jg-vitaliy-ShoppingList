@@ -2,6 +2,8 @@ package com.javaguru.shoppinglist.controller;
 
 import com.javaguru.shoppinglist.domain.UserEntity;
 import com.javaguru.shoppinglist.service.UserService;
+import com.javaguru.shoppinglist.service.validation.UserNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,6 +16,8 @@ public class UserController {
     public UserController(UserService service) {
         this.service = service;
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
     public UserEntity addProduct(@RequestBody UserEntity entity) {
         return service.create(entity);
@@ -29,18 +33,26 @@ public class UserController {
         return service.findUserById(id);
     }
 
-    @GetMapping("/product/{username}")
+    @GetMapping("/name/{username}")
     public UserEntity findUserByName(@PathVariable String username) {
         return service.findUserByName(username);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/update")
-    public UserEntity update(@RequestBody UserEntity entity) {
-        return service.update(entity);
+    public void update(@RequestBody UserEntity entity) {
+        service.update(entity);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        return service.delete(id);
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler
+    public void handleNotFound(UserNotFoundException exception) {
+        System.out.println(exception.getMessage());
     }
 }

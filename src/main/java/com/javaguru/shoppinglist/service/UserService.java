@@ -25,16 +25,15 @@ public class UserService {
                 .orElseThrow(() -> new ProductNotFoundException("User not found, id: " + id));
     }
 
-    public UserEntity update(UserEntity entity) {
+    public void update(UserEntity entity) {
         UserEntity existingUser = repository.findById(entity.getId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
         existingUser.setUsername(entity.getUsername());
-        return repository.save(existingUser);
+         repository.save(existingUser);
     }
 
-    public String delete(Long id){
+    public void delete(Long id){
         repository.deleteById(id);
-        return "Successfully deleted" + id;
     }
 
     public UserEntity findUserByName(String username) {

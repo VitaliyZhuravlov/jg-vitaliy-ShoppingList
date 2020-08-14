@@ -3,6 +3,8 @@ package com.javaguru.shoppinglist.controller;
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
+import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -16,7 +18,8 @@ public class ProductController {
         this.service = service;
     }
 
-    @PostMapping("/addProduct")
+    @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductDto addProduct(@Valid @RequestBody ProductDto product) {
         return service.save(product);
     }
@@ -36,13 +39,21 @@ public class ProductController {
         return service.findProductByName(name);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/update")
-    public ProductEntity update(@RequestBody ProductEntity product) {
-        return service.update(product);
+    public void update(@Valid @RequestBody ProductDto product) {
+        service.update(product);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        return service.delete(id);
+    public void deleteProduct(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler
+    public void handleNotFound(ProductNotFoundException exception) {
+        System.out.println(exception.getMessage());
     }
 }
