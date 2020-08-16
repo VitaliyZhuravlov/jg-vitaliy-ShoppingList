@@ -1,4 +1,4 @@
-package com.javaguru.shoppinglist.service.validation;
+package com.javaguru.shoppinglist.exceptions;
 
 import java.util.Date;
 import java.util.Objects;

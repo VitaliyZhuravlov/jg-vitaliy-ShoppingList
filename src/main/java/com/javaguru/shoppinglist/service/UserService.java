@@ -2,8 +2,8 @@ package com.javaguru.shoppinglist.service;
 
 import com.javaguru.shoppinglist.domain.UserEntity;
 import com.javaguru.shoppinglist.repository.UserRepository;
-import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
-import com.javaguru.shoppinglist.service.validation.UserNotFoundException;
+import com.javaguru.shoppinglist.exceptions.ProductNotFoundException;
+import com.javaguru.shoppinglist.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

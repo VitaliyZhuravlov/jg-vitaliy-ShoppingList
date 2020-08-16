@@ -15,7 +15,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Length(min = 3, max = 40)
+    @Length(min = 3, max = 30)
     private String username;
 
     @OneToMany(targetEntity = ProductEntity.class,cascade = CascadeType.ALL)

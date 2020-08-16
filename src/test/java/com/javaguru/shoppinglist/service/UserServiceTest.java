@@ -2,35 +2,31 @@ package com.javaguru.shoppinglist.service;
 
 import com.javaguru.shoppinglist.domain.UserEntity;
 import com.javaguru.shoppinglist.repository.UserRepository;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
 
     @Autowired
+    @Mock
     private UserService service;
 
     @MockBean
     private UserRepository repository;
 
     @Test
-    public void testCreateUser(){
+    public void shouldCreateUser(){
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
         userEntity.setUsername("Petya");
@@ -39,7 +35,15 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindAllUsers(){
+    public void shouldDeleteUser(){
+      final Long userId=1L;
+      service.delete(userId);
+      service.delete(userId);
+      verify(repository,times(2)).deleteById(userId);
+    }
+
+    @Test
+    public void shouldFindAllUsers(){
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
         userEntity.setUsername("Petya");

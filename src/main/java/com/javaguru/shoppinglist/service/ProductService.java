@@ -4,7 +4,7 @@ import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.mappers.BeanMapper;
 import com.javaguru.shoppinglist.repository.ProductRepository;
-import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
+import com.javaguru.shoppinglist.exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
