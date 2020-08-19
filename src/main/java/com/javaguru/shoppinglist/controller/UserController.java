@@ -19,12 +19,12 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public UserEntity addProduct(@RequestBody UserEntity entity) {
+    public UserEntity add(@RequestBody UserEntity entity) {
         return service.create(entity);
     }
 
     @GetMapping("/all")
-    public List<UserEntity> findAllProducts() {
+    public List<UserEntity> findAllUsers() {
         return service.findAll();
     }
 
