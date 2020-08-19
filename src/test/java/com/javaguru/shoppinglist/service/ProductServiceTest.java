@@ -2,7 +2,7 @@ package com.javaguru.shoppinglist.service;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
-import com.javaguru.shoppinglist.mappers.BeanMapper;
+import com.javaguru.shoppinglist.mappers.ProductMapper;
 import com.javaguru.shoppinglist.repository.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ public class ProductServiceTest {
     @Mock
     private ProductRepository repository;
     @Mock
-    private BeanMapper beanMapper;
+    private ProductMapper beanMapper;
     @InjectMocks
     private ProductService victim;
 

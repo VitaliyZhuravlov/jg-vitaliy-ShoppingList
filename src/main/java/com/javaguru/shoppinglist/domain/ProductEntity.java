@@ -20,7 +20,7 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
     @Column(name ="category")
-    private  String category;
+    private String category;
 
     public ProductEntity() {
     }
@@ -69,15 +69,6 @@ public class ProductEntity {
         return Objects.hash(id, name, price, discount, description, category);
     }
 
-    private ProductEntity(Builder builder) {
-        setId(builder.id);
-        setName(builder.name);
-        setPrice(builder.price);
-        setDiscount(builder.discount);
-        setDescription(builder.description);
-        setCategory(builder.category);
-    }
-
     public Long getId() {
         return id;
     }
@@ -124,52 +115,5 @@ public class ProductEntity {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-
-    public static final class Builder {
-        private Long id;
-        private String name;
-        private BigDecimal price;
-        private BigDecimal discount;
-        private String description;
-        private String category;
-
-        public Builder() {
-        }
-
-        public Builder withId(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder withName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder withPrice(BigDecimal price) {
-            this.price = price;
-            return this;
-        }
-
-        public Builder withDiscount(BigDecimal discount) {
-            this.discount = discount;
-            return this;
-        }
-
-        public Builder withDescription(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public Builder withCategory(String category) {
-            this.category = category;
-            return this;
-        }
-
-        public ProductEntity build() {
-            return new ProductEntity(this);
-        }
     }
 }

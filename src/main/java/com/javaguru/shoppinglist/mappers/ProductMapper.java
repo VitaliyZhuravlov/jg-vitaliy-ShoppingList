@@ -5,7 +5,7 @@ import com.javaguru.shoppinglist.dto.ProductDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanMapper {
+public class ProductMapper {
 
     public ProductDto toDto(ProductEntity entity) {
         ProductDto dto = new ProductDto();

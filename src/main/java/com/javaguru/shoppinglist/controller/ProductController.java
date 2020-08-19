@@ -1,13 +1,12 @@
 package com.javaguru.shoppinglist.controller;
 
-import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
 import com.javaguru.shoppinglist.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/products")
@@ -25,17 +24,17 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public List<ProductEntity> findAllProducts() {
+    public ArrayList<ProductDto> findAllProducts() {
         return service.findAll();
     }
 
     @GetMapping("/id/{id}")
-    public ProductEntity findProductById(@PathVariable Long id) {
+    public ProductDto findProductById(@PathVariable Long id) {
         return service.findProductById(id);
     }
 
     @GetMapping("/{name}")
-    public ProductEntity findProductByName(@PathVariable String name) {
+    public ProductDto findProductByName(@PathVariable String name) {
         return service.findProductByName(name);
     }
 

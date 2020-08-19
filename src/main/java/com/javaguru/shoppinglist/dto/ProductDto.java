@@ -3,6 +3,7 @@ package com.javaguru.shoppinglist.dto;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Objects;
 
 public class ProductDto {
