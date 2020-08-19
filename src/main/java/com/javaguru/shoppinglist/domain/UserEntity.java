@@ -2,6 +2,7 @@ package com.javaguru.shoppinglist.domain;
 
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
@@ -14,11 +15,12 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
+    @NotEmpty
     @Length(min = 3, max = 30)
     private String username;
 
     @OneToMany(targetEntity = ProductEntity.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "up_fk", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<ProductEntity> products;
 
     public List<ProductEntity> getProducts() {

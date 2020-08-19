@@ -10,20 +10,20 @@ import java.util.ArrayList;
 public class ProductService {
 
     private final ProductRepository repository;
-    private final ProductMapper beanMapper;
+    private final ProductMapper mapper;
 
     public ProductService(ProductRepository repository,
-                          ProductMapper beanMapper) {
+                          ProductMapper mapper) {
         this.repository = repository;
-        this.beanMapper = beanMapper;
+        this.mapper = mapper;
     }
 
     public ProductDto save(ProductDto productDto) {
-        return beanMapper.toDto(repository.save(beanMapper.toEntity(productDto)));
+        return mapper.toDto(repository.save(mapper.toEntity(productDto)));
     }
 
     public ProductDto findProductById(Long id)  {
-        return beanMapper.toDto(repository.findById(id)
+        return mapper.toDto(repository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found, id: " + id)));
     }
 
@@ -32,17 +32,17 @@ public class ProductService {
     }
 
     public void update(ProductDto productDto) {
-        beanMapper.toDto(repository.save(beanMapper.toEntity(productDto)));
+        mapper.toDto(repository.save(mapper.toEntity(productDto)));
     }
 
     public ProductDto findProductByName(String name) {
-        return beanMapper.toDto(repository.findByName(name)
+        return mapper.toDto(repository.findByName(name)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found, name: " + name)));
     }
 
     public ArrayList<ProductDto> findAll() {
         ArrayList<ProductDto> dtoList = new ArrayList<>();
-        repository.findAll().forEach(productEntity -> dtoList.add(beanMapper.toDto(productEntity)));
+        repository.findAll().forEach(productEntity -> dtoList.add(mapper.toDto(productEntity)));
         return dtoList;
     }
 }

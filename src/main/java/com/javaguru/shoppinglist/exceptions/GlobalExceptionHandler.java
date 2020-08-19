@@ -30,6 +30,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> customValidationErrorHandling(MethodArgumentNotValidException exception){
         ErrorDetails errorDetails = new ErrorDetails(new Date(), "Validation error",
                 Objects.requireNonNull(exception.getBindingResult().getFieldError()).getDefaultMessage());
-        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

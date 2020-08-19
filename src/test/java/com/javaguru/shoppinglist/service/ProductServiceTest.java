@@ -22,40 +22,14 @@ public class ProductServiceTest {
     @Mock
     private ProductRepository repository;
     @Mock
-    private ProductMapper beanMapper;
+    private ProductMapper mapper;
     @InjectMocks
     private ProductService victim;
 
     @Test
-    public void shouldFindAllProducts(){
-        ProductEntity product = new ProductEntity();
-        product.setId(25L);
-        product.setName("Cherry");
-        product.setPrice(new BigDecimal(0.99));
-        product.setDiscount(new BigDecimal(0));
-        product.setDescription("Cherry cherry cherry");
-        product.setCategory("FRUIT");
-
-        ProductEntity product2 = new ProductEntity();
-        product.setId(20L);
-        product.setName("Banana");
-        product.setPrice(new BigDecimal(0.79));
-        product.setDiscount(new BigDecimal(0));
-        product.setDescription("Banana kg");
-        product.setCategory("FRUIT");
-
-        List<ProductEntity> productEntity = new ArrayList<>();
-        productEntity.add(product);
-        productEntity.add(product2);
-
-        when(repository.findAll()).thenReturn(productEntity);
-        assertEquals(victim.findAll(),productEntity);
-    }
-
-    @Test
     public void shouldSaveProduct() {
         when(repository.save(any())).thenReturn(entity());
-        when(beanMapper.toDto(entity())).thenReturn(productDto(20L));
+        when(mapper.toDto(entity())).thenReturn(productDto(20L));
         ProductDto dto = victim.save(productDto(null));
         assertEquals(productDto(20L), dto);
     }
