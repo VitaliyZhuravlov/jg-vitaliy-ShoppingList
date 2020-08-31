@@ -1,47 +1,48 @@
 package com.javaguru.shoppinglist.service;
 
-import com.javaguru.shoppinglist.domain.UserEntity;
+import com.javaguru.shoppinglist.dto.UserDto;
+import com.javaguru.shoppinglist.mappers.UserMapper;
 import com.javaguru.shoppinglist.repository.UserRepository;
-import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
-import com.javaguru.shoppinglist.service.validation.UserNotFoundException;
+import com.javaguru.shoppinglist.exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class UserService {
 
     private final UserRepository repository;
+    private final UserMapper mapper;
 
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, UserMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public UserEntity create(UserEntity entity) {
-        return repository.save(entity);
+    public UserDto create(UserDto dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
-    public UserEntity findUserById(Long id)  {
-        return repository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("User not found, id: " + id));
+    public UserDto findUserById(Long id)  {
+        return mapper.toDto(repository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("User not found, id: " + id)));
     }
 
-    public void update(UserEntity entity) {
-        UserEntity existingUser = repository.findById(entity.getId())
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-        existingUser.setUsername(entity.getUsername());
-         repository.save(existingUser);
+    public void update(UserDto dto) {
+        mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     public void delete(Long id){
         repository.deleteById(id);
     }
 
-    public UserEntity findUserByName(String username) {
-        return repository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+    public UserDto findUserByName(String username) {
+        return mapper.toDto(repository.findByUsername(username)
+                .orElseThrow(() -> new ProductNotFoundException("Product not found, name: " + username)));
     }
 
-    public List<UserEntity> findAll() {
-        return repository.findAll();
+    public ArrayList<UserDto> findAll() {
+        ArrayList<UserDto> dtoList = new ArrayList<>();
+        repository.findAll().forEach(userEntity -> dtoList.add(mapper.toDto(userEntity)));
+        return dtoList;
     }
 }

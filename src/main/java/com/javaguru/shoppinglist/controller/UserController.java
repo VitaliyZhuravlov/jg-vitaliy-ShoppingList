@@ -1,11 +1,11 @@
 package com.javaguru.shoppinglist.controller;
 
-import com.javaguru.shoppinglist.domain.UserEntity;
+import com.javaguru.shoppinglist.dto.UserDto;
 import com.javaguru.shoppinglist.service.UserService;
-import com.javaguru.shoppinglist.service.validation.UserNotFoundException;
+import com.javaguru.shoppinglist.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/users")
@@ -18,34 +18,34 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/create")
-    public UserEntity addProduct(@RequestBody UserEntity entity) {
-        return service.create(entity);
+    @PostMapping
+    public UserDto add(@RequestBody UserDto dto) {
+        return service.create(dto);
     }
 
-    @GetMapping("/all")
-    public List<UserEntity> findAllProducts() {
+    @GetMapping
+    public ArrayList<UserDto> findAllUsers() {
         return service.findAll();
     }
 
-    @GetMapping("/id/{id}")
-    public UserEntity findUserById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public UserDto findUserById(@PathVariable Long id) {
         return service.findUserById(id);
     }
 
-    @GetMapping("/name/{username}")
-    public UserEntity findUserByName(@PathVariable String username) {
+    @GetMapping("/{username}")
+    public UserDto findUserByName(@PathVariable String username) {
         return service.findUserByName(username);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/update")
-    public void update(@RequestBody UserEntity entity) {
-        service.update(entity);
+    @PutMapping
+    public void update(@RequestBody UserDto dto) {
+        service.update(dto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

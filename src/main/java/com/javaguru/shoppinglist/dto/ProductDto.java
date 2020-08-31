@@ -9,6 +9,7 @@ public class ProductDto {
 
     private Long id;
     @NotNull
+    @NotEmpty
     @Length(min = 3,max = 32 , message = "Product name must be between 3 and 32 characters")
     private String name;
 
@@ -29,6 +30,16 @@ public class ProductDto {
 
     @NotEmpty
     private String category;
+
+    private BigDecimal actualPrice;
+
+    public BigDecimal getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(BigDecimal actualPrice) {
+        this.actualPrice = actualPrice;
+    }
 
     public Long getId() {
         return id;

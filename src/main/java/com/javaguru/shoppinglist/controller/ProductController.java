@@ -1,13 +1,12 @@
 package com.javaguru.shoppinglist.controller;
 
-import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
-import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
+import com.javaguru.shoppinglist.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/products")
@@ -18,35 +17,35 @@ public class ProductController {
         this.service = service;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDto addProduct(@Valid @RequestBody ProductDto product) {
         return service.save(product);
     }
 
-    @GetMapping("/all")
-    public List<ProductEntity> findAllProducts() {
+    @GetMapping
+    public ArrayList<ProductDto> findAllProducts() {
         return service.findAll();
     }
 
-    @GetMapping("/id/{id}")
-    public ProductEntity findProductById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ProductDto findProductById(@PathVariable Long id) {
         return service.findProductById(id);
     }
 
     @GetMapping("/{name}")
-    public ProductEntity findProductByName(@PathVariable String name) {
+    public ProductDto findProductByName(@PathVariable String name) {
         return service.findProductByName(name);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/update")
+    @PutMapping
     public void update(@Valid @RequestBody ProductDto product) {
         service.update(product);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
         service.delete(id);
     }

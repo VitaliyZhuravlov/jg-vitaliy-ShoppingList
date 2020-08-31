@@ -27,14 +27,20 @@ public class UserEntityTest {
     }
 
     @Test
-    public void shouldDetectInvalidUsername() {
+    public void shouldDetectUsernameIsTooShort() {
         UserEntity userEntity = new UserEntity(2L,"a");
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
         assertEquals(violations.size(), 1);
-
         ConstraintViolation<UserEntity> violation = violations.iterator().next();
         assertEquals("username", violation.getPropertyPath().toString());
         assertEquals("a", violation.getInvalidValue());
+    }
+
+    @Test
+    public void shouldDetectIsNull() {
+        UserEntity userEntity = new UserEntity(2L,null);
+        Set<ConstraintViolation<UserEntity>> constraintViolations = validator.validate(userEntity);
+        assertEquals( 1, constraintViolations.size());
     }
 
     @Test

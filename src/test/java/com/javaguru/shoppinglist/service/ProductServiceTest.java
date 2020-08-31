@@ -1,9 +1,8 @@
 package com.javaguru.shoppinglist.service;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
-import com.javaguru.shoppinglist.domain.UserEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
-import com.javaguru.shoppinglist.mappers.BeanMapper;
+import com.javaguru.shoppinglist.mappers.ProductMapper;
 import com.javaguru.shoppinglist.repository.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -24,16 +20,24 @@ public class ProductServiceTest {
     @Mock
     private ProductRepository repository;
     @Mock
-    private BeanMapper beanMapper;
+    private ProductMapper mapper;
     @InjectMocks
     private ProductService victim;
 
     @Test
     public void shouldSaveProduct() {
         when(repository.save(any())).thenReturn(entity());
-        when(beanMapper.toDto(entity())).thenReturn(productDto(20L));
+        when(mapper.toDto(entity())).thenReturn(productDto(20L));
         ProductDto dto = victim.save(productDto(null));
         assertEquals(productDto(20L), dto);
+    }
+
+    @Test
+    public void shouldDeleteProduct(){
+        final Long productId=1L;
+        victim.delete(productId);
+        victim.delete(productId);
+        verify(repository,times(2)).deleteById(productId);
     }
 
     private ProductDto productDto(Long id) {
