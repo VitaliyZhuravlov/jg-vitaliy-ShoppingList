@@ -1,11 +1,8 @@
 package com.javaguru.shoppinglist.domain;
 
-import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,20 +11,17 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 30)
+    @Column(name = "username")
     private String username;
 
-    @OneToMany(targetEntity = ProductEntity.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private List<ProductEntity> products;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<ProductEntity> products;
 
-    public List<ProductEntity> getProducts() {
+    public Set<ProductEntity> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductEntity> products) {
+    public void setProducts(Set<ProductEntity> products) {
         this.products = products;
     }
 
@@ -61,12 +55,13 @@ public class UserEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(username, that.username);
+                Objects.equals(username, that.username) &&
+                Objects.equals(products, that.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username);
+        return Objects.hash(id, username, products);
     }
 
     @Override
@@ -74,6 +69,7 @@ public class UserEntity {
         return "UserEntity{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", products=" + products +
                 '}';
     }
 }

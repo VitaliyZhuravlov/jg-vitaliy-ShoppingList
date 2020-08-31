@@ -22,6 +22,17 @@ public class ProductEntity {
     @Column(name ="category")
     private String category;
 
+    @ManyToOne
+    private UserEntity user;
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
     public ProductEntity() {
     }
 

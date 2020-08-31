@@ -17,18 +17,18 @@ public class ProductController {
         this.service = service;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDto addProduct(@Valid @RequestBody ProductDto product) {
         return service.save(product);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ArrayList<ProductDto> findAllProducts() {
         return service.findAll();
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ProductDto findProductById(@PathVariable Long id) {
         return service.findProductById(id);
     }
@@ -39,13 +39,13 @@ public class ProductController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/update")
+    @PutMapping
     public void update(@Valid @RequestBody ProductDto product) {
         service.update(product);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
         service.delete(id);
     }
